@@ -15,7 +15,7 @@ cli
       parser: [ 'p', 'Data parser (bson, json)', 'string', 'bson' ],
       out: [ 'o', ' Specifies the directory where saves the output', 'string',
         'dump/' ],
-      tar: [ 'r', 'Pack files into a .tar file', 'string' ],
+      tar: [ 'r', 'Pack files into a .tar file, or "-" to output to stdout', 'string' ],
       collections: [ 'c', 'Specifies a collection to backup', 'string' ],
       query: [ 'q', 'Query that optionally limits the documents included',
         'string' ],
@@ -43,6 +43,7 @@ cli.setApp(process.title, VERSION).main(
         collections: options.collections ? JSON.parse(options.collections)
           : null,
         tar: options.tar,
+        stream: options.tar === '-' ? process.stdout : null,
         query: options.query ? JSON.parse(options.query) : null,
         logger: options.verbose,
         metadata: options.metadata,
