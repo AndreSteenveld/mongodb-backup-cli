@@ -33,7 +33,7 @@ cli.setApp(process.title, VERSION).main(
       self.fatal('Missing uri option');
     }
 
-    self.spinner('Working..');
+    self.spinner('Working..', false, process.stderr);
     try {
       backup({
         uri: args[0] || options.host,
@@ -50,15 +50,15 @@ cli.setApp(process.title, VERSION).main(
         callback: function(err) {
 
           if (err) {
-            self.spinner('Working.. error\n', true);
+            self.spinner('Working.. error\n', true, process.stderr);
             self.fatal(err.message);
           } else {
-            self.spinner('Working.. done\n', true);
+            self.spinner('Working.. done\n', true, process.stderr);
           }
         }
       });
     } catch (e) {
-      self.spinner('Working.. error\n', true);
+      self.spinner('Working.. error\n', true, process.stderr);
       self.fatal(e.message);
     }
   });
